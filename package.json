@@ -1,0 +1,23 @@
+{
+  "name": "es6",
+  "version": "1.0.0",
+  "description": "ES6的学习和实践",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src/index.js -o dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaocaomei666/ES6.git"
+  },
+  "author": "小草莓",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaocaomei666/ES6/issues"
+  },
+  "homepage": "https://github.com/xiaocaomei666/ES6#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
