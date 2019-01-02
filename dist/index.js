@@ -363,3 +363,19 @@ function add5(a) {
 }
 
 console.log(add5.length); // 1
+console.log('222');
+console.log('444444444');
+
+/**              10.ES6中的函数和数组补漏 --09 */
+var json = {
+    a: 'wmx',
+    b: '666'
+};
+function func(_ref) {
+    var a = _ref.a,
+        _ref$b = _ref.b,
+        b = _ref$b === undefined ? '棒棒哒' : _ref$b;
+
+    console.log(a, b);
+}
+func(json);
