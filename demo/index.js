@@ -315,11 +315,231 @@ function func({a,b='棒棒哒'}) {
  }
  func(json) // wmx666 函数能解构Json
 
- console.log('8888888888')
+ console.log('以下是用...进行数组的解构赋值')
 
- let arr = ['wmx','棒棒哒','888']
+//  以下是用...进行数组的解构赋值
+
+ let arr4 = ['wmx','棒棒哒','888']
 
  function func2(a,b,c){
      console.log('啦啦啦',a,b,c)
  }
- func2(...arg)
+ func2(...arr4) // '啦啦啦','wmx','棒棒哒','888'
+
+//  in是用来判断对象或者数组中是否存在某个值的
+console.log('a' in json) // true
+console.log('c' in json) // false
+console.log(0 in arr4) // true
+
+let arr5 = [,,,,,]
+console.log(arr5.length) // 5 以前会使用length属性进行判断，为0表示没有数组元素。但是这并不准确，或者说真实开发中有弊端。
+console.log(0 in arr5) // false 判断该数组中是否全是空值
+
+
+let arr6 = ['小草莓','','棒棒哒','','888']
+
+// 数组的遍历方法  forEach循环的特点是会自动省略为空的数组元素，相当于直接给我们筛空了
+arr6.forEach((item,index) => {
+    console.log(item ,index) // 小草莓 0       1     棒棒哒 2   3      888 4
+})
+
+let arr7 = ['小草莓','小草莓','棒棒哒','小草莓','888']
+
+console.log('filter 过滤8888888888888888888888888888888')
+// filter 过滤 filter为“过滤”、“筛选”之意。指数组filter后，返回过滤后的新数组
+arr6.filter(x => console.log(x)) // 小草莓    棒棒哒   888 
+
+let f1 = [0,1,2,3,4]
+let arrF1 = f1.filter(item => {
+    return item
+})
+console.log(arrF1) // [1,2,3,4]
+
+let arrF2 = f1.filter(item => {
+    return item>2
+})
+console.log(arrF2) // [3,4]
+
+
+// some   some意指“某些”，指是否“某些项”合乎条件
+// some要求至少有1个值让callback返回true就可以了
+console.log('some意指“某些”，指是否“某些项”合乎条件')
+arr6.some(x =>console.log(x)) // 小草莓    棒棒哒   888 
+
+let some1 = [5,8,10,2,6]
+let current = 8
+let arrSome1 = some1.some(item => {
+    return item>11
+})
+console.log(arrSome1) // false
+
+function higherCurrent(value){
+    return value>current
+}
+if(some1.some(higherCurrent)){
+    console.log('存在满足的条件')
+}else{
+    console.log('不存在满足的条件')
+}
+//存在满足的条件
+
+// every every需要每一个妃子都要让朕满意，
+if(some1.every(higherCurrent)){
+    console.log('都满足条件')
+}else{
+    console.log('不存在都满足条件') 
+}
+//不存在都满足条件
+
+
+
+// map map在这里起到一个替换的作用
+console.log('map')
+console.log(arr6.map(x => 'web')) // ["web", "web", "web", "web", "web"]
+
+// 在实际使用的时候，我们可以利用map方法方便获得对象数组中的特定属性值们。
+var users = [
+    {name: "张含韵", "email": "zhang@email.com"},
+    {name: "江一燕",   "email": "jiang@email.com"},
+    {name: "李小璐",  "email": "li@email.com"}
+  ];
+var emilArray = users.map(item => {
+    return item.email
+})
+console.log(emilArray) //  ["zhang@email.com", "jiang@email.com", "li@email.com"]
+console.log(emilArray.join('-')) // zhang@email.com-jiang@email.com-li@email.com
+console.log(emilArray.toString('*')) // zhang@email.com,jiang@email.com,li@email.com
+
+// join()方法就是在数组元素中间，加了一些间隔
+let arr8 = ['wmx','棒棒','hahaha']
+console.log('join')
+console.log(arr8.join('?')) // wmx?棒棒?hahaha
+
+//  toString()方法 转换成字符串 默认加逗号
+console.log(arr8.toString()) // wmx,棒棒,hahaha
+
+/**              11.ES6中的对象 --10 */
+// 对象赋值
+console.log('对象赋值')
+let nameMe = 'wmx'
+let age = 18
+var obj = {nameMe,age}
+console.log(obj) // {nameMe: "wmx", age: 18}
+
+// 对象Key值构建
+console.log('对象Key值构建')
+let key = 'age'
+var obj2 = {
+    [key]:100
+}
+console.log(obj2.age) // 100
+
+// 自定义对象方法
+console.log('自定义对象方法')
+var obj3 = {
+    add(a,b){
+        return a+b;
+    }
+}
+console.log(obj3.add(1,2)) // 3
+
+// Object.is( ) 对象比较
+console.log('对象的比较方法,以前进行对象值的比较，经常使用===来判断')
+var obj4 = {name:'wmx'};
+var obj5 = {name:'wmx'};
+console.log(obj4.name === obj5.name) // true
+console.log('那ES6为我们提供了is方法进行对比。')
+console.log(Object.is(obj4.name,obj5.name)) // true
+
+console.log('===为同值相等，is()为严格相等')
+console.log(+0 === -0); //true
+console.log(NaN === NaN ); //false
+console.log(Object.is(+0,-0)); //true
+console.log(Object.is(NaN,NaN)); //true
+
+// Object.assign( )合并对象
+console.log('Object.assign( )合并对象')
+var a = {a:'wmx'};
+var b = {b:'666'};
+var c = {c:'hahaha'};
+let d = Object.assign(a,b,c)
+console.log(d) // {a: "wmx", b: "666", c: "hahaha"}
+
+
+/**              第12节：Symbol在对象中的作用 --11 */
+console.log('全局标记 symbol')
+// 声明  打印
+var sss = Symbol()
+console.log(typeof(sss)) // symbol
+var s = Symbol('wmx')
+console.log(s) // Symbol(wmx) (控制台打印红色字体)
+console.log(s.toString()) // Symbol(wmx)(控制台打印的是正常的字体)
+// 构建对象的key
+var wmx = Symbol();
+var wmxObj = {
+    [wmx]:'小草莓'
+}
+console.log(wmxObj) // {Symbol(): "小草莓"}
+console.log(wmxObj[wmx]) // 小草莓
+wmxObj[wmx] = '变异小草莓'
+console.log(wmxObj[wmx]) // 变异小草莓
+
+// Symbol对象元素的保护作用
+let objSymbol = {name:'wmx','skill':'web'}
+let ageSymbol = Symbol()
+obj[ageSymbol] = 18
+for(let val in objSymbol){
+    console.log(val) // name skill 
+    console.log(objSymbol[val]) // wmx  web
+}
+console.log(objSymbol) // {name: "wmx", skill: "web"}
+
+
+/**             13. Set和WeakSet数据结构 --12 */
+console.log('Set的数据结构是以数组的形式构建的')
+// set的声明
+let setArr = new Set(['大一','大二','大三','大四'])
+console.log(setArr) // Set(4) {"大一", "大二", "大三", "大四"}
+
+console.log('Set和Array的区别是Set不允许内部有重复的值，如果有只显示一个，相当于去重。虽然Set很像数组，但是他不是数组。')
+
+
+let setArr2 = new Set(['大一','大二','大三','大四','大一'])
+console.log(setArr2) // Set(4) {"大一", "大二", "大三", "大四"}
+
+// set的增删查清空
+setArr.add('毕业啦')
+console.log('追加 add',setArr) // Set(5) {"大一", "大二", "大三", "大四", "毕业啦"}
+
+setArr.delete('大一')
+console.log('删除 delete',setArr) // Set(4) {"大二", "大三", "大四", "毕业啦"}
+
+console.log('用has进行值的查找，返回的是true或者false。',setArr.has('毕业啦'))  // true
+
+setArr.clear()
+console.log(setArr) // Set(0) {}
+
+let setArr3 = new Set(['大一','大二','大三','大四','大一'])
+for(let item of setArr3){
+    console.log(item) // "大一", "大二", "大三", "大四"
+}
+console.log(setArr3.size) // 4
+
+setArr3.forEach(item => {
+    console.log(item) // "大一", "大二", "大三", "大四"
+})
+
+console.log('WeakSet的声明')
+// WeakSet的声明的声明
+let weakObj = new WeakSet();
+let objW = {a:'wmx',b:'888'};
+weakObj.add(objW)
+console.log(weakObj) // WeakSet {{a:'wmx',b:'888'}}
+
+// let weakObj2 = new WeakSet({a:'wmx',b:'888'});
+// console.log(weakObj2) // 如果你直接在new 的时候就放入值，将报错。
+let objW2 = objW
+weakObj.add(objW2)
+console.log(weakObj) // WeakSet {{a:'wmx',b:'888'}}
+
+
