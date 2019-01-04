@@ -543,3 +543,8 @@ weakObj.add(objW2)
 console.log(weakObj) // WeakSet {{a:'wmx',b:'888'}}
 
 
+let objW3 = {a:'wmx',b:'888'};
+weakObj.add(objW3)
+console.log(weakObj) // WeakSet {{a:'wmx',b:'888'},{a:'wmx',b:'888'}}
+
+
