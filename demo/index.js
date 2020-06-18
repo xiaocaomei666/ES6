@@ -547,4 +547,106 @@ let objW3 = {a:'wmx',b:'888'};
 weakObj.add(objW3)
 console.log(weakObj) // WeakSet {{a:'wmx',b:'888'},{a:'wmx',b:'888'}}
 
+/**             14. map数据结构 --13 */
+let json14 = {
+    name:'wmx',
+    age:18
+}
+console.log(json14.name) // wmx
+
+// set 增
+var map = new Map();
+map.set(json14,'lalala')
+console.log(map) // Map(1) {{…} => "lalala"}
+
+map.set('wmx',json14)
+console.log(map) // Map(2) {{…} => "lalala", "wmx" => {…}}
+
+// get 查 取
+console.log(map.get('wmx')) // {name: "wmx", age: 18}
+
+// delate 删除
+map.delete(json14)
+console.log(map) // 只剩下一对key:value Map(1) {"wmx" => {…}}
+
+// size 属性
+console.log(map.size) // 1 map的长度
+
+// has 查找是否存在
+console.log(map.has('wmx')) // true
+console.log(map.has('lalala')) // false
+
+// clear 清除所有元素 
+map.clear()
+console.log(map) // Map(0) {}
+
+
+/**            第15节：用Proxy进行预处理 --14 */
+var obj15 = {
+    add:function(val){
+        return val + 10;
+    },
+    name:'i am wmx'
+};
+console.log(obj15.add(10)) // 20
+console.log(obj15.name) // i am wmx
+
+// 声明Proxy的基本形式 new Proxy({},{});
+var pro = new Proxy({
+    add:function(val){
+        return val+10;
+    },
+    name:'i am proxy'
+},{
+    get:function(target,key,property){
+        console.log('come in get',target,key,property) 
+        // come in get
+        // {add: ƒ, name: "i am proxy"}
+        // name
+        // Proxy {add: ƒ, name: "i am proxy"}
+        return target[key]
+    }
+});
+console.log(pro.name) // i am proxy
+
+// get属性 得到某对象属性值时预处理的方法
+// set属性  改变Proxy属性值时，进行的预处理
+
+var pro2 = new Proxy({
+    add:function(val){
+        return val + 10;
+    },
+    name:'i am pro2'
+},{
+    get:function(target,key,property){
+        console.log('come in get') // come in get
+        return target[key]
+    },
+    set:function(target,key,value,receiver){
+        console.log(`setting ${key} = ${value}`)
+        return target[key] = value;
+    }
+})
+
+console.log(pro2.name) // i am pro2
+pro2.name = 'new wmx'
+console.log('----------------------') // ----------------------
+console.log(pro2.name) // come in get    new wmx 
+
+// apply的作用是调用内部的方法，使用在方法体是一个匿名函数的时候
+get = function() {
+    return 'i am bangbangde'
+}
+var handler = {
+    apply(target,ctx,args){
+        console.log('do apply')
+        return 
+    }
+}
+
+
+
+
+
+
 
